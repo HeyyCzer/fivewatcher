@@ -1,5 +1,5 @@
 {
-	"name": "watcher",
+	"name": "fivewatcher",
 	"module": "src/index.ts",
 	"type": "module",
 	"scripts": {
