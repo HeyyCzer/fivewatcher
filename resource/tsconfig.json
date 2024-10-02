@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+	  "module": "es2020",
+	  "target": "es2018",
+	  "outDir": "./dist",
+	  "types": ["@citizenfx/server", "@types/node"],
+	  "resolveJsonModule": true,
+	  "esModuleInterop": true,
+	  "allowUnreachableCode": false,
+	  "strictFunctionTypes": true,
+	  "moduleResolution": "node",
+	  "noImplicitAny": true,
+	  "noImplicitThis": true,
+	  "noUnusedLocals": true,
+	  "skipLibCheck": true
+	},
+	"include": ["./src", "./web"],
+	"exclude": ["node_modules"]
+  }
