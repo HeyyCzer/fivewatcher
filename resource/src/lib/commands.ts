@@ -5,6 +5,20 @@ export function getCommands() {
 }
 
 export function addCommand(command: Command): void {
+	// Check if the command name is already in use
+	if (COMMANDS.some(c => c.name === command.name || (c.aliases && c.aliases.includes(command.name)))) {
+		console.error(`Command ${command.name} already exists.`);
+		return;
+	}
+
+	// Check if any of the aliases are already in use
+	for (const alias of command.aliases || []) {
+		if (COMMANDS.some(c => c.name === alias || (c.aliases && c.aliases.includes(alias)))) {
+			console.error(`A command with ${alias} already exists.`);
+			return;
+		}
+	}
+
 	COMMANDS.push(command);
 }
 
