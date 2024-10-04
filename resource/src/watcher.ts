@@ -6,7 +6,9 @@ import { extractFilesFromManifest } from "./lib/manifest";
 
 const WATCHED_RESOURCES: WatchedResource[] = [];
 
-const restartResource = debounce(_restartResource, 1000);
+const restartResource = debounce(_restartResource, 2000, {
+	immediate: true,
+});
 
 export function watchResource(resourceName: string, force?: boolean): boolean {
 	if (resourceName === thisResource) {
@@ -47,6 +49,14 @@ export function getWatchedResources(): string[] {
 	return WATCHED_RESOURCES.map(resource => resource.resource);
 }
 
+export function loadWatchedResources() {
+	const savedResources = LoadResourceFile(GetCurrentResourceName(), "watched.json");
+	if (!savedResources) return;
+
+	const resources = JSON.parse(savedResources) as string[];
+	resources.forEach(resource => watchResource(resource, true));
+}
+
 const WATCHERS: {
 	resource: string;
 	file: string;
@@ -73,10 +83,14 @@ function startWatchingResource(resourceName: string) {
 			ignoreInitial: true
 		});
 
-		watcher.on("change", (path) => {
-			console.log(`File ^4${path.replace(resourcePath, "")} ^0has been changed.`);
+		const fileAddedOrChanged = (path: string) => {
+			console.log(`File ^2${path.replace(resourcePath, "")} ^0has been added or changed.`);
 			restartResource(resourceName);
-		});
+		}
+
+		watcher.on("add", fileAddedOrChanged);
+		watcher.on("addDir", fileAddedOrChanged);
+		watcher.on("change", fileAddedOrChanged);
 
 		watcher.on("unlink", (path) => {
 			console.log(`File ^1${path.replace(resourcePath, "")} ^0has been removed and will no longer be watched.`);
@@ -98,5 +112,6 @@ function stopWatchingResource(resourceName: string) {
 }
 
 function _restartResource(resourceName: string) {
+	ExecuteCommand(`refresh`);
 	ExecuteCommand(`ensure ${resourceName}`);
 }
