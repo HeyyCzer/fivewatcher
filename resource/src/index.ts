@@ -5,7 +5,7 @@ import "./commands/list.command";
 import "./commands/unwatch.command";
 import "./commands/watch.command";
 
-const thisResource = GetCurrentResourceName();
+export const thisResource = GetCurrentResourceName();
 
 if (!IsPrincipalAceAllowed(`resource.${thisResource}`, "command.ensure")) {
 	console.error(`This resource requires the 'command.ensure' permission to work properly.`);

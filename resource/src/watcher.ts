@@ -1,6 +1,7 @@
 import { watch, type FSWatcher } from "chokidar";
 import debounce from "debounce";
 import fg from "fast-glob";
+import { thisResource } from ".";
 import { extractFilesFromManifest } from "./lib/manifest";
 
 const WATCHED_RESOURCES: WatchedResource[] = [];
@@ -8,6 +9,11 @@ const WATCHED_RESOURCES: WatchedResource[] = [];
 const restartResource = debounce(_restartResource, 1000);
 
 export function watchResource(resourceName: string, force?: boolean): boolean {
+	if (resourceName === thisResource) {
+		console.log(`^3FiveWatcher cannot watch itself.^0`);
+		return false;
+	}
+	
 	if (!force && WATCHED_RESOURCES.some(resource => resource.resource === resourceName)) {
 		console.log(`^3Resource ^4${resourceName} ^3is already being watched.^0`);
 		return false;
