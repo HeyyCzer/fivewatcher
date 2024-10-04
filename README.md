@@ -3,7 +3,7 @@
 
 ## 🚀 Getting Started
 
-Download the latest version of FiveWatcher from the [releases page](https://github.com/heyyczer/watcher/releases).
+You can FiveWatcher from [here](https://github.com/HeyyCzer/fivewatcher/releases/download/latest/fivewatcher.zip) or from our [releases page](https://github.com/heyyczer/watcher/releases).
 
 ## ☕ Using FiveWatcher
 
