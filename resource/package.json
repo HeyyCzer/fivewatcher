@@ -4,7 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "webpack",
-		"watch:build": "webpack --watch"
+		"build:watch": "webpack --watch"
 	},
 	"peerDependencies": {
 		"typescript": "^5.0.0"
