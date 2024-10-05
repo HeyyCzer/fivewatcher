@@ -6,9 +6,7 @@ import { extractFilesFromManifest } from "./lib/manifest";
 
 const WATCHED_RESOURCES: WatchedResource[] = [];
 
-const restartResource = debounce(_restartResource, 2000, {
-	immediate: true,
-});
+const restartResource = debounce(_restartResource, 2000);
 
 export function watchResource(resourceName: string, force?: boolean): boolean {
 	if (resourceName === thisResource) {
