@@ -21,7 +21,7 @@ function loadWatcher() {
 	}
 
 	console.log("^0");
-	console.log(`^4[FIVEWATCHER] ^0Resource ${thisResource} started.^0`);
+	console.log(`^4[FIVEWATCHER] ^0Resource started.^0`);
 	console.log(`^4[FIVEWATCHER] ^0Type ^4'watcher help' ^0to see the available commands.^0`);
 	console.log("^0");
 
