@@ -1,5 +1,5 @@
 # FiveWatcher
-> **FiveWatcher** makes local development easier by not having to restart resources when you modify them.
+> **FiveWatcher** makes FiveM development easier by not having to restart resources when you modify them.
 
 ## 🚀 Getting Started
 
