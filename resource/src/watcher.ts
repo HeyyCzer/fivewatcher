@@ -84,6 +84,8 @@ function startWatchingResource(resourceName: string) {
 		const fileAddedOrChanged = (path: string) => {
 			console.log(`File ^2${beatifyPath(path, resourcePath)} ^0in ^2${resourceName} ^0has been added or changed.`);
 			restartResource(resourceName);
+			stopWatchingResource(resourceName);
+			startWatchingResource(resourceName);
 		}
 
 		watcher.on("add", fileAddedOrChanged);
@@ -93,7 +95,8 @@ function startWatchingResource(resourceName: string) {
 		watcher.on("unlink", (path) => {
 			console.log(`File ^1${beatifyPath(path, resourcePath)} ^0in ^2${resourceName} ^0has been removed and will no longer be watched.`);
 			restartResource(resourceName);
-			watcher.close();
+			stopWatchingResource(resourceName);
+			startWatchingResource(resourceName);
 		});
 
 		WATCHERS.push({
