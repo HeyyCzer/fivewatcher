@@ -22,7 +22,6 @@ export function watchResource(resourceName: string, force?: boolean): boolean {
 
 	WATCHED_RESOURCES.push({
 		resource: resourceName,
-		files: []
 	});
 	startWatchingResource(resourceName);
 
