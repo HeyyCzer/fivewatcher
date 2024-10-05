@@ -111,6 +111,8 @@ function stopWatchingResource(resourceName: string) {
 }
 
 function _restartResource(resourceName: string) {
-	ExecuteCommand(`refresh`);
-	ExecuteCommand(`ensure ${resourceName}`);
+	setTimeout(() => {
+		ExecuteCommand(`refresh`);
+		ExecuteCommand(`ensure ${resourceName}`);
+	}, 100);
 }
