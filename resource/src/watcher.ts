@@ -3,6 +3,7 @@ import debounce from "debounce";
 import fg from "fast-glob";
 import { thisResource } from ".";
 import { extractFilesFromManifest } from "./lib/manifest";
+import { beatifyPath } from "./utils/path";
 
 const WATCHED_RESOURCES: WatchedResource[] = [];
 
@@ -82,7 +83,7 @@ function startWatchingResource(resourceName: string) {
 		});
 
 		const fileAddedOrChanged = (path: string) => {
-			console.log(`File ^2${path.replace(resourcePath, "")} ^0has been added or changed.`);
+			console.log(`File ^2${beatifyPath(path, resourcePath)} ^0in ^2${resourceName} ^0has been added or changed.`);
 			restartResource(resourceName);
 		}
 
@@ -91,7 +92,7 @@ function startWatchingResource(resourceName: string) {
 		watcher.on("change", fileAddedOrChanged);
 
 		watcher.on("unlink", (path) => {
-			console.log(`File ^1${path.replace(resourcePath, "")} ^0has been removed and will no longer be watched.`);
+			console.log(`File ^1${beatifyPath(path, resourcePath)} ^0in ^2${resourceName} ^0has been removed and will no longer be watched.`);
 			restartResource(resourceName);
 			watcher.close();
 		});
